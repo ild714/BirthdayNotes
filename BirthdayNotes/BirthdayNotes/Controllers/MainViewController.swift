@@ -133,7 +133,7 @@ extension MainViewController:UIImagePickerControllerDelegate,UINavigationControl
     }
 }
 
-//MARK: Encode function
+//MARK: Save function
 extension MainViewController {
     func save() {
         let jsonEncoder = JSONEncoder()
