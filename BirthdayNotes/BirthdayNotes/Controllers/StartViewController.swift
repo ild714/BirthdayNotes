@@ -12,6 +12,7 @@ class StartViewController: UIViewController {
 
     var labelExplonation: UILabel!
     var buttonStart: UIButton!
+    var labelStart: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,13 +25,21 @@ class StartViewController: UIViewController {
         labelExplonation.adjustsFontSizeToFitWidth = true
         labelExplonation.translatesAutoresizingMaskIntoConstraints = false
         
-        buttonStart = UIButton(frame: CGRect(x: 0, y: 0, width: 300, height: 150))
+        labelStart = UILabel()
+        labelStart.text = "Start!"
+        labelStart.font = .systemFont(ofSize: 25)
+        labelStart.adjustsFontSizeToFitWidth = true
+        labelStart.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(labelStart)
+        
+        
+        buttonStart = UIButton(type: .custom)
+        buttonStart.titleLabel?.numberOfLines = 2
+        buttonStart.setImage(UIImage(named: "heart"),for: .normal)
         buttonStart.translatesAutoresizingMaskIntoConstraints = false
-        buttonStart.layer.cornerRadius = 10
         buttonStart.titleLabel?.font = .systemFont(ofSize: 25)
         buttonStart.backgroundColor = .white
         buttonStart.setTitleColor(.black, for: .normal)
-        buttonStart.setTitle("Start!", for: .normal)
         buttonStart.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
         view.addSubview(buttonStart)
         
@@ -40,8 +49,10 @@ class StartViewController: UIViewController {
         let safeArea = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([labelExplonation.topAnchor.constraint(equalTo: safeArea.topAnchor,constant: 60),
             labelExplonation.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            labelStart.topAnchor.constraint(equalTo: labelExplonation.bottomAnchor, constant: 180),
+            labelStart.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             buttonStart.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            buttonStart.topAnchor.constraint(equalTo: labelExplonation.bottomAnchor, constant: 200)])
+            buttonStart.topAnchor.constraint(equalTo: labelStart.bottomAnchor, constant: 10)])
         
     }
     

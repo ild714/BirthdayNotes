@@ -17,6 +17,18 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let defaults = UserDefaults.standard
+        
+        if let savedPersons = defaults.object(forKey: "persons") as? Data {
+            let jsonDecoder = JSONDecoder()
+            
+            do {
+                persons = try jsonDecoder.decode([Person].self,from: savedPersons)
+            } catch {
+                print("Failed to load persons")
+            }
+        }
+        
         let gradientCollectionView = GradientView()
         gradientCollectionView.colors = [.yellow,.green]
         
@@ -66,13 +78,15 @@ class MainViewController: UIViewController {
             person.name = newName
             
             self?.collectionView.reloadData()
+            self?.save()
         })
         
-        //ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         ac.addAction(UIAlertAction(title: "Delete", style: .destructive){[weak self] _ in
             self?.persons.remove(at: indexPath.item)
             self?.collectionView.reloadData()
+            self?.save()
         })
+        
         
         present(ac,animated: true)
     }
@@ -109,6 +123,7 @@ extension MainViewController:UIImagePickerControllerDelegate,UINavigationControl
         let person = Person(name: "Family", image: imagePath.path)
         persons.append(person)
         collectionView.reloadData()
+        save()
         dismiss(animated: true)
     }
     
@@ -116,4 +131,18 @@ extension MainViewController:UIImagePickerControllerDelegate,UINavigationControl
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
     }
+}
+
+//MARK: Encode function
+extension MainViewController {
+    func save() {
+        let jsonEncoder = JSONEncoder()
+        if let saveData = try? jsonEncoder.encode(persons){
+            let defaults = UserDefaults.standard
+            defaults.set(saveData,forKey: "persons")
+        } else {
+            print("Failed to save persons")
+        }
+    }
+    
 }
