@@ -40,6 +40,7 @@ class RootViewController: UIViewController {
     
     func showMainViewController() {
         let mainViewController = MainViewController()
+        
         addChild(mainViewController)
         mainViewController.view.frame = view.bounds
         view.addSubview(mainViewController.view)

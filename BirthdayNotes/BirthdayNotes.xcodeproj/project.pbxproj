@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		210C4C3123924153007576B0 /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210C4C3023924153007576B0 /* CustomCollectionViewCell.swift */; };
+		210C4C3A2392631D007576B0 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210C4C392392631D007576B0 /* GradientView.swift */; };
 		2180AECF23898A0B00EFA51A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2180AECE23898A0B00EFA51A /* AppDelegate.swift */; };
 		2180AED623898A0D00EFA51A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2180AED523898A0D00EFA51A /* Assets.xcassets */; };
 		2180AED923898A0D00EFA51A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2180AED723898A0D00EFA51A /* LaunchScreen.storyboard */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		210C4C3023924153007576B0 /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
+		210C4C392392631D007576B0 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		2180AECB23898A0B00EFA51A /* BirthdayNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BirthdayNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2180AECE23898A0B00EFA51A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2180AED523898A0D00EFA51A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -37,6 +41,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		210C4C3223925CA9007576B0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		210C4C3323925CB5007576B0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				210C4C3023924153007576B0 /* CustomCollectionViewCell.swift */,
+				210C4C392392631D007576B0 /* GradientView.swift */,
+				2180AED723898A0D00EFA51A /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		210C4C3423925CBA007576B0 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2180AEE023898B5100EFA51A /* RootViewController.swift */,
+				2180AEE22389901000EFA51A /* StartViewController.swift */,
+				2180AEE423899BB300EFA51A /* MainViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		210C4C3523925CDB007576B0 /* Property Lists */ = {
+			isa = PBXGroup;
+			children = (
+				2180AEDA23898A0D00EFA51A /* Info.plist */,
+			);
+			path = "Property Lists";
+			sourceTree = "<group>";
+		};
+		210C4C3623925D48007576B0 /* AppDelegates */ = {
+			isa = PBXGroup;
+			children = (
+				2180AECE23898A0B00EFA51A /* AppDelegate.swift */,
+			);
+			path = AppDelegates;
+			sourceTree = "<group>";
+		};
 		2180AEC223898A0B00EFA51A = {
 			isa = PBXGroup;
 			children = (
@@ -56,13 +103,12 @@
 		2180AECD23898A0B00EFA51A /* BirthdayNotes */ = {
 			isa = PBXGroup;
 			children = (
-				2180AECE23898A0B00EFA51A /* AppDelegate.swift */,
-				2180AEE023898B5100EFA51A /* RootViewController.swift */,
-				2180AEE22389901000EFA51A /* StartViewController.swift */,
-				2180AEE423899BB300EFA51A /* MainViewController.swift */,
+				210C4C3623925D48007576B0 /* AppDelegates */,
+				210C4C3523925CDB007576B0 /* Property Lists */,
+				210C4C3423925CBA007576B0 /* Controllers */,
+				210C4C3323925CB5007576B0 /* View */,
+				210C4C3223925CA9007576B0 /* Models */,
 				2180AED523898A0D00EFA51A /* Assets.xcassets */,
-				2180AED723898A0D00EFA51A /* LaunchScreen.storyboard */,
-				2180AEDA23898A0D00EFA51A /* Info.plist */,
 			);
 			path = BirthdayNotes;
 			sourceTree = "<group>";
@@ -138,6 +184,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2180AEE123898B5100EFA51A /* RootViewController.swift in Sources */,
+				210C4C3123924153007576B0 /* CustomCollectionViewCell.swift in Sources */,
+				210C4C3A2392631D007576B0 /* GradientView.swift in Sources */,
 				2180AECF23898A0B00EFA51A /* AppDelegate.swift in Sources */,
 				2180AEE32389901000EFA51A /* StartViewController.swift in Sources */,
 				2180AEE523899BB300EFA51A /* MainViewController.swift in Sources */,
@@ -280,7 +328,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2NR48U86L7;
-				INFOPLIST_FILE = BirthdayNotes/Info.plist;
+				INFOPLIST_FILE = "BirthdayNotes/Property Lists/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -298,7 +346,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2NR48U86L7;
-				INFOPLIST_FILE = BirthdayNotes/Info.plist;
+				INFOPLIST_FILE = "BirthdayNotes/Property Lists/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
