@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		210C4C3123924153007576B0 /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210C4C3023924153007576B0 /* CustomCollectionViewCell.swift */; };
 		210C4C3A2392631D007576B0 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210C4C392392631D007576B0 /* GradientView.swift */; };
+		210C4C3C23928C50007576B0 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210C4C3B23928C50007576B0 /* Person.swift */; };
 		2180AECF23898A0B00EFA51A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2180AECE23898A0B00EFA51A /* AppDelegate.swift */; };
 		2180AED623898A0D00EFA51A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2180AED523898A0D00EFA51A /* Assets.xcassets */; };
 		2180AED923898A0D00EFA51A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2180AED723898A0D00EFA51A /* LaunchScreen.storyboard */; };
@@ -20,6 +21,7 @@
 /* Begin PBXFileReference section */
 		210C4C3023924153007576B0 /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
 		210C4C392392631D007576B0 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		210C4C3B23928C50007576B0 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		2180AECB23898A0B00EFA51A /* BirthdayNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BirthdayNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2180AECE23898A0B00EFA51A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2180AED523898A0D00EFA51A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -44,6 +46,7 @@
 		210C4C3223925CA9007576B0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				210C4C3B23928C50007576B0 /* Person.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 				210C4C3123924153007576B0 /* CustomCollectionViewCell.swift in Sources */,
 				210C4C3A2392631D007576B0 /* GradientView.swift in Sources */,
 				2180AECF23898A0B00EFA51A /* AppDelegate.swift in Sources */,
+				210C4C3C23928C50007576B0 /* Person.swift in Sources */,
 				2180AEE32389901000EFA51A /* StartViewController.swift in Sources */,
 				2180AEE523899BB300EFA51A /* MainViewController.swift in Sources */,
 			);

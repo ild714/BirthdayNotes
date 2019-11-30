@@ -28,7 +28,7 @@ class StartViewController: UIViewController {
         buttonStart.translatesAutoresizingMaskIntoConstraints = false
         buttonStart.layer.cornerRadius = 10
         buttonStart.titleLabel?.font = .systemFont(ofSize: 25)
-        buttonStart.backgroundColor = UIColor(red: 0.8, green: 1, blue: 0.24, alpha: 1)
+        buttonStart.backgroundColor = .white
         buttonStart.setTitleColor(.black, for: .normal)
         buttonStart.setTitle("Start!", for: .normal)
         buttonStart.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)

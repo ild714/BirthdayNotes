@@ -15,7 +15,8 @@ class RootViewController: UIViewController {
     init() {
         let alreadyStarted = UserDefaults.standard.bool(forKey: "started")
         if alreadyStarted {
-            currentViewController = MainViewController()
+            let navigationController = UINavigationController(rootViewController: MainViewController())
+            currentViewController = navigationController
         } else {
         currentViewController = StartViewController()
         }
@@ -40,15 +41,16 @@ class RootViewController: UIViewController {
     
     func showMainViewController() {
         let mainViewController = MainViewController()
+        let navigationController = UINavigationController(rootViewController: mainViewController)
         
-        addChild(mainViewController)
-        mainViewController.view.frame = view.bounds
-        view.addSubview(mainViewController.view)
-        mainViewController.didMove(toParent: self)
+        addChild(navigationController)
+        navigationController.view.frame = view.bounds
+        view.addSubview(navigationController.view)
+        navigationController.didMove(toParent: self)
         currentViewController.willMove(toParent: nil)
         currentViewController.view.removeFromSuperview()
         currentViewController.removeFromParent()
-        currentViewController = mainViewController
+        currentViewController = navigationController
     }
     
     

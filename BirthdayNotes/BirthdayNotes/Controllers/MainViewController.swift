@@ -10,7 +10,7 @@ import UIKit
 
 class MainViewController: UIViewController {
 
-    let names = ["test","test","test","test"]
+    var persons = [Person]()
     let layout = UICollectionViewFlowLayout()
     var collectionView: UICollectionView!
     
@@ -18,10 +18,10 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         let gradientCollectionView = GradientView()
-        gradientCollectionView.colors = [.green,.yellow]
+        gradientCollectionView.colors = [.yellow,.green]
         
         
-        layout.itemSize = CGSize(width: 100, height: 100)
+        layout.itemSize = CGSize(width: 150, height: 150)
         layout.minimumInteritemSpacing = 5
         layout.minimumLineSpacing = 20
         layout.scrollDirection = .vertical
@@ -36,29 +36,84 @@ class MainViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addPerson))
+    }
+    
+    @objc func addPerson() {
+        let picker = UIImagePickerController()
+        picker.allowsEditing = true
+        picker.delegate = self
+        present(picker,animated: true)
     }
     
     var gradientView: GradientView {
         return collectionView.backgroundView as! GradientView
     }
-
-}
-
-extension MainViewController: UICollectionViewDelegate {
     
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let person = persons[indexPath.item]
+        
+        let ac = UIAlertController(title: "Rename or delete cell", message: nil, preferredStyle: .alert)
+        ac.addTextField { (text) in
+            text.text = person.name
+        }
+        
+        ac.addAction(UIAlertAction(title: "Ok", style: .default){[weak self,weak ac] _ in
+            guard let newName = ac?.textFields?[0].text else {
+                return
+            }
+            person.name = newName
+            
+            self?.collectionView.reloadData()
+        })
+        
+        //ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        ac.addAction(UIAlertAction(title: "Delete", style: .destructive){[weak self] _ in
+            self?.persons.remove(at: indexPath.item)
+            self?.collectionView.reloadData()
+        })
+        
+        present(ac,animated: true)
+    }
+
 }
 
-extension MainViewController: UICollectionViewDataSource {
+//MARK: CollectionView DataSource and Delegate
+extension MainViewController: UICollectionViewDataSource,UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       return names.count
+       return persons.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.identifier, for: indexPath) as! CustomCollectionViewCell
-        let name = names[indexPath.item]
-        cell.label.text = name
+        let person = persons[indexPath.item]
+        cell.label.text = person.name
+        cell.image.image = UIImage(named: person.image)
         return cell
     }
+}
+
+//MARK: ImagePicker ControllerDelegate, NavigationControllerDelegate
+extension MainViewController:UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[.editedImage] as? UIImage else {return}
+        
+        let imageName = UUID().uuidString
+        let imagePath = getDocumentsDirectory().appendingPathComponent(imageName)
+        
+        if let jpegData = image.jpegData(compressionQuality: 0.9) {
+            try? jpegData.write(to: imagePath)
+        }
+        
+        let person = Person(name: "Family", image: imagePath.path)
+        persons.append(person)
+        collectionView.reloadData()
+        dismiss(animated: true)
+    }
     
-    
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
 }
