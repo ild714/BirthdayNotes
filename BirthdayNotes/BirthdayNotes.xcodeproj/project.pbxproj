@@ -106,11 +106,11 @@
 		2180AECD23898A0B00EFA51A /* BirthdayNotes */ = {
 			isa = PBXGroup;
 			children = (
-				210C4C3623925D48007576B0 /* AppDelegates */,
-				210C4C3523925CDB007576B0 /* Property Lists */,
 				210C4C3423925CBA007576B0 /* Controllers */,
 				210C4C3323925CB5007576B0 /* View */,
 				210C4C3223925CA9007576B0 /* Models */,
+				210C4C3623925D48007576B0 /* AppDelegates */,
+				210C4C3523925CDB007576B0 /* Property Lists */,
 				2180AED523898A0D00EFA51A /* Assets.xcassets */,
 			);
 			path = BirthdayNotes;
@@ -333,6 +333,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2NR48U86L7;
 				INFOPLIST_FILE = "BirthdayNotes/Property Lists/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -351,6 +352,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2NR48U86L7;
 				INFOPLIST_FILE = "BirthdayNotes/Property Lists/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

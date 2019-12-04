@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import UserNotifications
 
 class MainViewController: UIViewController {
 
     var persons = [Person]()
     let layout = UICollectionViewFlowLayout()
     var collectionView: UICollectionView!
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +35,7 @@ class MainViewController: UIViewController {
         gradientCollectionView.colors = [.yellow,.green]
         
         
-        layout.itemSize = CGSize(width: 150, height: 150)
+        layout.itemSize = CGSize(width: 150, height: 200)
         layout.minimumInteritemSpacing = 5
         layout.minimumLineSpacing = 20
         layout.scrollDirection = .vertical
@@ -48,7 +50,21 @@ class MainViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         
+        
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addPerson))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Turn on notifications", style: .plain, target: self, action: #selector(registerLocal))
+    }
+    
+    @objc func registerLocal() {
+        let center = UNUserNotificationCenter.current()
+        
+        center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+            if granted {
+                print("Yay!")
+            } else {
+                print("D'oh")
+            }
+        }
     }
     
     @objc func addPerson() {
@@ -71,6 +87,7 @@ class MainViewController: UIViewController {
             text.text = person.name
         }
         
+        
         ac.addAction(UIAlertAction(title: "Ok", style: .default){[weak self,weak ac] _ in
             guard let newName = ac?.textFields?[0].text else {
                 return
@@ -91,6 +108,7 @@ class MainViewController: UIViewController {
         present(ac,animated: true)
     }
 
+
 }
 
 //MARK: CollectionView DataSource and Delegate
@@ -102,6 +120,8 @@ extension MainViewController: UICollectionViewDataSource,UICollectionViewDelegat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.identifier, for: indexPath) as! CustomCollectionViewCell
         let person = persons[indexPath.item]
+        
+        
         cell.label.text = person.name
         cell.image.image = UIImage(named: person.image)
         return cell
@@ -146,3 +166,5 @@ extension MainViewController {
     }
     
 }
+
+
