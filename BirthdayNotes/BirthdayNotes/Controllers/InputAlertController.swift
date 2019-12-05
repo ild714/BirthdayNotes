@@ -8,23 +8,58 @@
 
 import UIKit
 
+protocol InputDelegate: class {
+    /// update UI by provided text
+    func updateInputUI(text: String) 
+}
+
 class InputAlertController: UIAlertController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    //MARK:- Properties
+    weak var delegate: InputDelegate?
+    
+    //MARK:- Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        createTextField()
+        let test = MainViewController()
+        test?.delegate = self 
     }
-    */
+    
+    //MARK:- Methods
+    private func createTextField() {
+        self.addTextField { (text) in
+            text.placeholder = "Enter name"
+        }
+    }
+    
+    
+    private func createAlertActions() {
+        let action = UIAlertAction(title: "Add", style: .default) { [weak self] (_) in
+            if let textField = self?.textFields?.first {
+                self?.delegate?.updateInputUI(text: textField.text!)
+            }
+        }
+        let cancelAction = UIAlertAction(title: "cancel", style: .destructive, handler: nil)
+        addAction(action)
+        addAction(cancelAction)
+    }
+    
+}
 
+extension InputAlertController: AlertDelegate {
+    func updateDate(ofMainViewController: Person) {
+        let action = UIAlertAction(title: "Add", style: .default) { [weak self] (_) in
+                   
+            if let textField = self?.textFields?.first {
+                       ofMainViewController.name = textField.text!
+                    
+                       //self?.delegate?.updateInputUI(text: textField.text!)
+                   }
+               }
+        let cancelAction = UIAlertAction(title: "cancel", style: .default, handler: nil)
+        self.addAction(action)
+        self.addAction(cancelAction)
+    }
 }

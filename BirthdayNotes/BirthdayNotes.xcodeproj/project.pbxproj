@@ -16,6 +16,7 @@
 		2180AEE123898B5100EFA51A /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2180AEE023898B5100EFA51A /* RootViewController.swift */; };
 		2180AEE32389901000EFA51A /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2180AEE22389901000EFA51A /* StartViewController.swift */; };
 		2180AEE523899BB300EFA51A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2180AEE423899BB300EFA51A /* MainViewController.swift */; };
+		21BAD3B22397E951009F0D82 /* InputAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BAD3B12397E951009F0D82 /* InputAlertController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		2180AEE023898B5100EFA51A /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		2180AEE22389901000EFA51A /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		2180AEE423899BB300EFA51A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		21BAD3B12397E951009F0D82 /* InputAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputAlertController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				2180AEE023898B5100EFA51A /* RootViewController.swift */,
 				2180AEE22389901000EFA51A /* StartViewController.swift */,
 				2180AEE423899BB300EFA51A /* MainViewController.swift */,
+				21BAD3B12397E951009F0D82 /* InputAlertController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -142,7 +145,7 @@
 		2180AEC323898A0B00EFA51A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1030;
+				LastSwiftUpdateCheck = 1120;
 				LastUpgradeCheck = 1030;
 				ORGANIZATIONNAME = SberBank;
 				TargetAttributes = {
@@ -187,6 +190,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2180AEE123898B5100EFA51A /* RootViewController.swift in Sources */,
+				21BAD3B22397E951009F0D82 /* InputAlertController.swift in Sources */,
 				210C4C3123924153007576B0 /* CustomCollectionViewCell.swift in Sources */,
 				210C4C3A2392631D007576B0 /* GradientView.swift in Sources */,
 				2180AECF23898A0B00EFA51A /* AppDelegate.swift in Sources */,

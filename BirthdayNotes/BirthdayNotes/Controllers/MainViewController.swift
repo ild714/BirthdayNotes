@@ -9,12 +9,18 @@
 import UIKit
 import UserNotifications
 
-class MainViewController: UIViewController {
+protocol AlertDelegate:class {
+    func updateDate(ofMainViewController: Person)
+}
 
+class MainViewController: UIViewController  {
+
+    weak var delegate: AlertDelegate?
     var persons = [Person]()
     let layout = UICollectionViewFlowLayout()
     var collectionView: UICollectionView!
    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,40 +84,49 @@ class MainViewController: UIViewController {
         return collectionView.backgroundView as! GradientView
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let person = persons[indexPath.item]
+        let inputAlert = InputAlertController(title: "Add name and data", message: nil, preferredStyle: .alert)
+        //inputAlert.delegate = self
+        self.delegate?.updateDate(ofMainViewController: persons[indexPath.row])
+        present(inputAlert,animated: true)
+        collectionView.reloadData()
         
-        let ac = UIAlertController(title: "Rename or delete cell", message: nil, preferredStyle: .alert)
-        ac.addTextField { (text) in
-            text.text = person.name
-        }
-        
-        
-        ac.addAction(UIAlertAction(title: "Ok", style: .default){[weak self,weak ac] _ in
-            guard let newName = ac?.textFields?[0].text else {
-                return
-            }
-            person.name = newName
-            
-            self?.collectionView.reloadData()
-            self?.save()
-        })
-        
-        ac.addAction(UIAlertAction(title: "Delete", style: .destructive){[weak self] _ in
-            self?.persons.remove(at: indexPath.item)
-            self?.collectionView.reloadData()
-            self?.save()
-        })
+        //var person = persons[indexPath.row]
+        //updateInputUI(text: String)
         
         
-        present(ac,animated: true)
+        
+        //person.name = "ff"
+//        let ac = UIAlertController(title: "Rename or delete cell", message: nil, preferredStyle: .alert)
+//        ac.addTextField { (text) in
+//            text.text = person.name
+//        }
+//
+//
+//        ac.addAction(UIAlertAction(title: "Ok", style: .default){[weak self,weak ac] _ in
+//            guard let newName = ac?.textFields?[0].text else {
+//                return
+//            }
+//            person.name = newName
+//
+//            self?.collectionView.reloadData()
+//            self?.save()
+//        })
+//
+//        ac.addAction(UIAlertAction(title: "Delete", style: .destructive){[weak self] _ in
+//            self?.persons.remove(at: indexPath.item)
+//            self?.collectionView.reloadData()
+//            self?.save()
+//        })
+        
+        
+       // present(ac,animated: true)
     }
 
 
 }
 
-//MARK: CollectionView DataSource and Delegate
+//MARK:- CollectionView DataSource and Delegate
 extension MainViewController: UICollectionViewDataSource,UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
        return persons.count
@@ -128,7 +143,7 @@ extension MainViewController: UICollectionViewDataSource,UICollectionViewDelegat
     }
 }
 
-//MARK: ImagePicker ControllerDelegate, NavigationControllerDelegate
+//MARK:- ImagePicker ControllerDelegate, NavigationControllerDelegate
 extension MainViewController:UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.editedImage] as? UIImage else {return}
@@ -153,7 +168,7 @@ extension MainViewController:UIImagePickerControllerDelegate,UINavigationControl
     }
 }
 
-//MARK: Save function
+//MARK:- Save function
 extension MainViewController {
     func save() {
         let jsonEncoder = JSONEncoder()
@@ -164,7 +179,9 @@ extension MainViewController {
             print("Failed to save persons")
         }
     }
-    
 }
+
+
+
 
 
