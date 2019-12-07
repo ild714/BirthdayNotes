@@ -10,6 +10,7 @@ import UIKit
 
 class RootViewController: UIViewController {
 
+    //MARK:- Properties
     private var currentViewController: UIViewController
     
     init() {
@@ -27,6 +28,7 @@ class RootViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -39,6 +41,7 @@ class RootViewController: UIViewController {
         view.backgroundColor = .white
     }
     
+    //MARK:- Methods
     func showMainViewController() {
         let mainViewController = MainViewController()
         let navigationController = UINavigationController(rootViewController: mainViewController)

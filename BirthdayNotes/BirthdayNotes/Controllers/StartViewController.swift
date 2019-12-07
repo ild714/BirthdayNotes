@@ -10,10 +10,12 @@ import UIKit
 
 class StartViewController: UIViewController {
 
+    //MARK:- Properties
     var labelExplonation: UILabel!
+    var buttonHeart: UIButton!
     var buttonStart: UIButton!
-    var labelStart: UILabel!
     
+    //MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,23 +27,28 @@ class StartViewController: UIViewController {
         labelExplonation.adjustsFontSizeToFitWidth = true
         labelExplonation.translatesAutoresizingMaskIntoConstraints = false
         
-        labelStart = UILabel()
-        labelStart.text = "Start!"
-        labelStart.font = .systemFont(ofSize: 25)
-        labelStart.adjustsFontSizeToFitWidth = true
-        labelStart.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(labelStart)
-        
-        
         buttonStart = UIButton(type: .custom)
-        buttonStart.titleLabel?.numberOfLines = 2
-        buttonStart.setImage(UIImage(named: "heart"),for: .normal)
-        buttonStart.translatesAutoresizingMaskIntoConstraints = false
-        buttonStart.titleLabel?.font = .systemFont(ofSize: 25)
-        buttonStart.backgroundColor = .white
+        buttonStart.layer.cornerRadius = 10
+        buttonStart.setTitle("Start!", for: .normal)
         buttonStart.setTitleColor(.black, for: .normal)
+        buttonStart.titleLabel?.font = .systemFont(ofSize: 27)
+        //buttonStart.backgroundColor = .yellow
+        buttonStart.titleLabel?.center = view.center
         buttonStart.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
+        buttonStart.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(buttonStart)
+        
+        
+        buttonHeart = UIButton(type: .custom)
+        buttonHeart.titleLabel?.numberOfLines = 1
+        
+        buttonHeart.setImage(UIImage(named: "heart"),for: .normal)
+        buttonHeart.translatesAutoresizingMaskIntoConstraints = false
+        buttonHeart.titleLabel?.font = .systemFont(ofSize: 25)
+        //buttonStart.backgroundColor = .white
+        buttonHeart.setTitleColor(.black, for: .normal)
+        buttonHeart.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
+        view.addSubview(buttonHeart)
         
         
         view.addSubview(labelExplonation)
@@ -49,13 +56,14 @@ class StartViewController: UIViewController {
         let safeArea = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([labelExplonation.topAnchor.constraint(equalTo: safeArea.topAnchor,constant: 60),
             labelExplonation.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            labelStart.topAnchor.constraint(equalTo: labelExplonation.bottomAnchor, constant: 180),
-            labelStart.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            buttonStart.topAnchor.constraint(equalTo: labelExplonation.bottomAnchor, constant: 180),
             buttonStart.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            buttonStart.topAnchor.constraint(equalTo: labelStart.bottomAnchor, constant: 10)])
+            buttonHeart.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            buttonHeart.topAnchor.constraint(equalTo: buttonStart.bottomAnchor, constant: 10)])
         
     }
     
+    //MARK:- Methods
     @objc func startButtonTapped() {
         let rootViewController = AppDelegate.shared.rootViewController
         UserDefaults.standard.set(true,forKey: "started")
@@ -65,7 +73,7 @@ class StartViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        buttonStart.animate()
+        buttonHeart.animate()
     }
     
 }

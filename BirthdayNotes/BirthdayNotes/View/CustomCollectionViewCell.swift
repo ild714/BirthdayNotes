@@ -35,17 +35,6 @@ class CustomCollectionViewCell: UICollectionViewCell {
         dateTextField.translatesAutoresizingMaskIntoConstraints = false
         dateTextField.text = "Put date"
         dateTextField.textAlignment = .center
-        
-        datePicker = UIDatePicker()
-        datePicker?.datePickerMode = .date
-        datePicker?.addTarget(self, action: #selector(self.dateChanged(datePicker:)), for: .valueChanged)
-        
-        
-       // let tapGesture = UITapGestureRecognizer(target: gradientCollectionView, action: #selector(self.viewTapped(gestureRecognizers:)))
-        
-        dateTextField.inputView = datePicker
-        //dateTextField.text =
-        
         contentView.addSubview(dateTextField)
         
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -66,44 +55,6 @@ class CustomCollectionViewCell: UICollectionViewCell {
             ])
     }
     
-    @objc func viewTapped(gestureRecognizer: UITapGestureRecognizer){
-        self.endEditing(true)
-    }
-
-    @objc func dateChanged(datePicker: UIDatePicker){
-        let dateFormater = DateFormatter()
-        dateFormater.dateFormat = "MM/dd/yyyy"
-        dateTextField.text = dateFormater.string(from: datePicker.date)
-        
-        let month : String
-        dateFormater.dateFormat = "MM"
-        month = dateFormater.string(from: datePicker.date)
-        let day : String
-        dateFormater.dateFormat = "dd"
-        day = dateFormater.string(from: datePicker.date)
-        print(Int(month))
-        
-        let center = UNUserNotificationCenter.current()
-        center.removeAllPendingNotificationRequests()
-        
-        let content = UNMutableNotificationContent()
-        content.title = "Burthday"
-        content.body = "\(label.text!)"
-        content.categoryIdentifier = "alarm"
-        content.sound = .default
-        
-        var dateComponents = DateComponents()
-        dateComponents.month = Int(month)!
-        dateComponents.day = Int(day)!
-        dateComponents.hour = 16
-        dateComponents.minute = 50
-        
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-        //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-        center.add(request)
-        self.endEditing(true)
-    }
     
     private func randomGradientColor() -> [UIColor]{
         return [UIColor.random(),UIColor.random()]
@@ -116,9 +67,9 @@ class CustomCollectionViewCell: UICollectionViewCell {
 
 extension UIColor {
     static func random() -> UIColor {
-        let red = CGFloat(Float.random(in: 0...255)/255)
-        let green = CGFloat(Float.random(in: 0...255)/255)
-        let blue = CGFloat(Float.random(in: 0...255)/255)
-        return UIColor(red: red, green: green, blue: blue, alpha: 1)
+        let red = CGFloat(Float.random(in: 100...240)/255)
+        let green = CGFloat(Float.random(in: 100...240)/255)
+        let blue = CGFloat(Float.random(in: 100...240)/255)
+        return UIColor(red: red, green: green, blue: blue, alpha: 0.5)
     }
 }

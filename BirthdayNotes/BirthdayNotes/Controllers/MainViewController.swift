@@ -9,19 +9,15 @@
 import UIKit
 import UserNotifications
 
-protocol AlertDelegate:class {
-    func updateDate(ofMainViewController: Person)
-}
 
 class MainViewController: UIViewController  {
 
-    weak var delegate: AlertDelegate?
+    //MARK:- Properties
     var persons = [Person]()
     let layout = UICollectionViewFlowLayout()
     var collectionView: UICollectionView!
-   
     
-    
+    //MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,7 +34,7 @@ class MainViewController: UIViewController  {
         }
         
         let gradientCollectionView = GradientView()
-        gradientCollectionView.colors = [.yellow,.green]
+        gradientCollectionView.colors = [.yellow,UIColor(displayP3Red: 10, green: 232, blue: 23, alpha: 1)]
         
         
         layout.itemSize = CGSize(width: 150, height: 200)
@@ -61,14 +57,15 @@ class MainViewController: UIViewController  {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Turn on notifications", style: .plain, target: self, action: #selector(registerLocal))
     }
     
+    //MARK:- Methods
     @objc func registerLocal() {
         let center = UNUserNotificationCenter.current()
         
-        center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+        center.requestAuthorization(options: [.alert, .badge, .sound]) {(granted, error) in
             if granted {
-                print("Yay!")
+                print("Notification turned on")
             } else {
-                print("D'oh")
+                print("Notification turned off")
             }
         }
     }
@@ -85,45 +82,18 @@ class MainViewController: UIViewController  {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let inputAlert = InputAlertController(title: "Add name and data", message: nil, preferredStyle: .alert)
-        //inputAlert.delegate = self
-        self.delegate?.updateDate(ofMainViewController: persons[indexPath.row])
-        present(inputAlert,animated: true)
-        collectionView.reloadData()
+        let inputAlert = InputAlertController(title: "Change name or date", message: nil, preferredStyle:.alert)
         
-        //var person = persons[indexPath.row]
-        //updateInputUI(text: String)
+        inputAlert.delegate = self
+        inputAlert.addTextField { (textField1) in
+            textField1.placeholder = "Change name"
+        }
         
+        inputAlert.name = persons[indexPath.row].name
+        inputAlert.index = indexPath.row
         
-        
-        //person.name = "ff"
-//        let ac = UIAlertController(title: "Rename or delete cell", message: nil, preferredStyle: .alert)
-//        ac.addTextField { (text) in
-//            text.text = person.name
-//        }
-//
-//
-//        ac.addAction(UIAlertAction(title: "Ok", style: .default){[weak self,weak ac] _ in
-//            guard let newName = ac?.textFields?[0].text else {
-//                return
-//            }
-//            person.name = newName
-//
-//            self?.collectionView.reloadData()
-//            self?.save()
-//        })
-//
-//        ac.addAction(UIAlertAction(title: "Delete", style: .destructive){[weak self] _ in
-//            self?.persons.remove(at: indexPath.item)
-//            self?.collectionView.reloadData()
-//            self?.save()
-//        })
-        
-        
-       // present(ac,animated: true)
+        present(inputAlert,animated: true,completion: nil)
     }
-
-
 }
 
 //MARK:- CollectionView DataSource and Delegate
@@ -139,6 +109,9 @@ extension MainViewController: UICollectionViewDataSource,UICollectionViewDelegat
         
         cell.label.text = person.name
         cell.image.image = UIImage(named: person.image)
+        let dateFormater = DateFormatter()
+        dateFormater.dateFormat = "MM/dd/yyyy"
+        cell.dateTextField.text = dateFormater.string(from: person.date ?? Date(timeIntervalSinceNow: 12))
         return cell
     }
 }
@@ -155,7 +128,8 @@ extension MainViewController:UIImagePickerControllerDelegate,UINavigationControl
             try? jpegData.write(to: imagePath)
         }
         
-        let person = Person(name: "Family", image: imagePath.path)
+        
+        let person = Person(name: "Family", image: imagePath.path,date: nil)
         persons.append(person)
         collectionView.reloadData()
         save()
@@ -178,6 +152,22 @@ extension MainViewController {
         } else {
             print("Failed to save persons")
         }
+    }
+}
+
+//MARK:- InputAlertController Delegate
+extension MainViewController: InputDelegate {
+    func updateInputUI(name: String,index: Int,date: Date?) {
+        persons[index].name = name
+        persons[index].date = date
+        collectionView.reloadData()
+        self.save()
+    }
+    
+    func deleteCell(index: Int) {
+        persons.remove(at: index)
+        collectionView.reloadData()
+        save()
     }
 }
 
