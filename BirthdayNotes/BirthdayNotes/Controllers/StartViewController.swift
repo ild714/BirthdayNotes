@@ -38,7 +38,6 @@ class StartViewController: UIViewController {
         buttonStart.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(buttonStart)
         
-        
         buttonHeart = UIButton(type: .custom)
         buttonHeart.titleLabel?.numberOfLines = 1
         
@@ -49,7 +48,6 @@ class StartViewController: UIViewController {
         buttonHeart.setTitleColor(.black, for: .normal)
         buttonHeart.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
         view.addSubview(buttonHeart)
-        
         
         view.addSubview(labelExplonation)
         

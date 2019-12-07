@@ -16,7 +16,6 @@ protocol InputDelegate: class {
     func deleteCell(index: Int)
 }
 
-
 class InputAlertController: UIAlertController {
     
     //MARK:- Properties
@@ -68,11 +67,10 @@ class InputAlertController: UIAlertController {
         var dateComponents = DateComponents()
         dateComponents.month = Int(month)!
         dateComponents.day = Int(day)!
-        dateComponents.hour = 16
-        dateComponents.minute = 50
+        dateComponents.hour = 14
+        dateComponents.minute = 10
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-        //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         center.add(request)
     }
