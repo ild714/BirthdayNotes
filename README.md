@@ -2,7 +2,7 @@
 
 ## The main purpose of the application is to help record notes of family birthdays
 
-## Main functionality:
+## Functionality:
 - add notes with name and date
 - pick photo for note
 - turn on notifications
